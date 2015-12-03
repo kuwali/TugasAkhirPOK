@@ -1,0 +1,2 @@
+@ECHO OFF
+"C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\avrasm2.exe" -S "C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\labels.tmp" -fI -W+ie -o "C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhirPOK.hex" -d "C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhirPOK.obj" -e "C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhirPOK.eep" -m "C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhirPOK.map" "C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm"
