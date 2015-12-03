@@ -14,7 +14,7 @@ memberikan feedback berupa orang tersebut terlambat atau tidak
 - LED, status
 - Button, button digunakan untuk ON/OFF program dan juga keperluan "enter"/"OK" pada kondisi tertentu
 - Keypad, untuk input dari pengguna (menggunakan keypad 3x4)
-- Timer Interrupt, untuk menghitung waktu keterlambatan
+- Timer Interrupt, untuk melakukan shutdown setelah user menekan off
 	
 ### Kelompok
 - Alva Thomson      | 1406527500
