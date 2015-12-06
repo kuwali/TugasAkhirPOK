@@ -1,86 +1,44 @@
 <ASSEMBLER_INFO>
  <VERSION>2.1.12</VERSION>
- <DEVICE>ATmega16</DEVICE>
- <WORKING_DIR>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK</WORKING_DIR>
+ <DEVICE>ATmega8515</DEVICE>
+ <WORKING_DIR>D:\TugasAkhirPOK\TugasAkhirPOK</WORKING_DIR>
  <INCLUDE_PATH>
   <DIR>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes</DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</SOURCE_FILE>
+ <SOURCE_FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</SOURCE_FILE>
  <INCLUDED_FILES>
-  <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\m16def.inc</FILE>
+  <FILE>C:\Program Files (x86)\Atmel\AVR Tools\AvrAssembler2\Appnotes\m8515def.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
-  <FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhirPOK.obj</FILE>
+  <FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.obj</FILE>
  </OBJECT_FILES>
  <HEX_FILES>
-  <FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhirPOK.hex</FILE>
+  <FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.hex</FILE>
  </HEX_FILES>
  <OUTPUT_FILES>
-  <FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhirPOK.map</FILE>
+  <FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.map</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <RESET><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>16</LINE></RESET>
-  <INIT><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>22</LINE></INIT>
-  <SERV_ROUTINE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>238</LINE></SERV_ROUTINE>
-  <GOTORESET><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>53</LINE></GOTORESET>
-  <SKIP><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>37</LINE></SKIP>
-  <CONT><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>48</LINE></CONT>
-  <LOOP><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>45</LINE></LOOP>
-  <MAIN><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>55</LINE></MAIN>
-  <INIT_LCD><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>505</LINE></INIT_LCD>
-  <CLEAR_LCD><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>526</LINE></CLEAR_LCD>
-  <START_TIMER><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>228</LINE></START_TIMER>
-  <NEED_UPDATE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>80</LINE></NEED_UPDATE>
-  <PAD_UPDATE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>103</LINE></PAD_UPDATE>
-  <PAD_PRESS><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>98</LINE></PAD_PRESS>
-  <PAD_READ><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>94</LINE></PAD_READ>
-  <GET_ASCII><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>544</LINE></GET_ASCII>
-  <WRITE_TEXT><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>535</LINE></WRITE_TEXT>
-  <STROBE0><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>118</LINE></STROBE0>
-  <THIS><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>126</LINE></THIS>
-  <BFORE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>123</LINE></BFORE>
-  <TIMER_GET><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>308</LINE></TIMER_GET>
-  <PROCLDI><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>169</LINE></PROCLDI>
-  <GOCPI><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>137</LINE></GOCPI>
-  <GOLDS><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>172</LINE></GOLDS>
-  <TIMER_EXPIRED><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>330</LINE></TIMER_EXPIRED>
-  <TIMER_RESET><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>277</LINE></TIMER_RESET>
-  <DCR><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>156</LINE></DCR>
-  <PADSTATE2><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>167</LINE></PADSTATE2>
-  <CASEx><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>365</LINE></CASEx>
-  <B4RET><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>225</LINE></B4RET>
-  <GO_CPI><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>208</LINE></GO_CPI>
-  <GOSUBI><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>220</LINE></GOSUBI>
-  <LENGTHREC><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>286</LINE></LENGTHREC>
-  <NOTDONE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>302</LINE></NOTDONE>
-  <GOSTD><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>304</LINE></GOSTD>
-  <TIM1><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>320</LINE></TIM1>
-  <TIM0><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>325</LINE></TIM0>
-  <STOPWATCH_GET><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>377</LINE></STOPWATCH_GET>
-  <CONT1><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>407</LINE></CONT1>
-  <STOPWATCH_CHECK><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>427</LINE></STOPWATCH_CHECK>
-  <CONT3><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>461</LINE></CONT3>
-  <CONT4><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>449</LINE></CONT4>
-  <CONT2><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>464</LINE></CONT2>
-  <DELAY><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>468</LINE></DELAY>
-  <WAIT_LCD><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>489</LINE></WAIT_LCD>
-  <ONE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>580</LINE></ONE>
-  <TWO><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>583</LINE></TWO>
-  <THREE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>586</LINE></THREE>
-  <FOUR><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>589</LINE></FOUR>
-  <FIVE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>592</LINE></FIVE>
-  <SIX><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>595</LINE></SIX>
-  <SEVEN><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>598</LINE></SEVEN>
-  <EIGHT><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>601</LINE></EIGHT>
-  <NINE><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>604</LINE></NINE>
-  <ZERO><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>607</LINE></ZERO>
-  <UPKEY><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>610</LINE></UPKEY>
-  <DOWNKEY><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>613</LINE></DOWNKEY>
-  <RIGHTKEY><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>616</LINE></RIGHTKEY>
-  <LEFTKEY><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>619</LINE></LEFTKEY>
-  <ENTER><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>622</LINE></ENTER>
-  <CLEARKEY><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>625</LINE></CLEARKEY>
-  <NEXT><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>628</LINE></NEXT>
-  <message><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\keypadLCD.asm</FILE><LINE>631</LINE></message>
+  <RESET><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>56</LINE></RESET>
+  <init_ram><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>107</LINE></init_ram>
+  <main><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>69</LINE></main>
+  <insert><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>173</LINE></insert>
+  <delete><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>226</LINE></delete>
+  <search><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>138</LINE></search>
+  <forever><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>95</LINE></forever>
+  <init_ram_do><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>113</LINE></init_ram_do>
+  <init_ram_return><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>123</LINE></init_ram_return>
+  <search_do><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>145</LINE></search_do>
+  <search_return><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>159</LINE></search_return>
+  <search_status><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>156</LINE></search_status>
+  <insert_init><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>182</LINE></insert_init>
+  <insert_do><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>191</LINE></insert_do>
+  <insert_ret><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>208</LINE></insert_ret>
+  <insert_shift><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>199</LINE></insert_shift>
+  <delete_do><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>232</LINE></delete_do>
+  <delete_return><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>264</LINE></delete_return>
+  <delete_now><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>247</LINE></delete_now>
+  <delete_shift><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>255</LINE></delete_shift>
+  <input><FILE>D:\TugasAkhirPOK\TugasAkhirPOK\TugasAkhirPOK.asm</FILE><LINE>269</LINE></input>
  </LABELS>
 </ASSEMBLER_INFO>
