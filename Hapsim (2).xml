@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<HAPSIM>
+   <General>
+      <Build>1930</Build>
+      <Position>
+         <top>245</top>
+         <bottom>716</bottom>
+         <left>549</left>
+         <right>1146</right>
+      </Position>
+      <StayOnTop>1</StayOnTop>
+      <Target>ATmega16</Target>
+   </General>
+   <Views>
+      <LCD>
+         <Name>LCD1</Name>
+         <Position>
+            <top>225</top>
+            <left>333</left>
+         </Position>
+         <DisplayConfig>
+            <columns>16</columns>
+            <rows>2</rows>
+            <bkColor>0xc1fa9d</bkColor>
+            <size>2</size>
+         </DisplayConfig>
+         <PortMapping>
+            <DataPort>
+               <Port>PORTC</Port>
+               <HighNibble>bit 4..7</HighNibble>
+               <LowNibble>bit 0..3</LowNibble>
+            </DataPort>
+            <EnablePin>
+               <Port>PORTA</Port>
+               <Bit>0</Bit>
+            </EnablePin>
+            <RW_Pin>
+               <WriteOnly>0</WriteOnly>
+               <Port>PORTA</Port>
+               <Bit>2</Bit>
+            </RW_Pin>
+            <RS_Pin>
+               <Port>PORTA</Port>
+               <Bit>1</Bit>
+            </RS_Pin>
+         </PortMapping>
+      </LCD>
+      <LEDs>
+         <Name>LEDs1</Name>
+         <Position>
+            <top>1</top>
+            <left>329</left>
+         </Position>
+         <Config index="0">
+            <Color>Yellow</Color>
+            <Name>LED0</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>0</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+         <Config index="1">
+            <Color>Yellow</Color>
+            <Name>LED1</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>1</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+         <Config index="2">
+            <Color>Yellow</Color>
+            <Name>LED2</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>2</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+         <Config index="3">
+            <Color>Yellow</Color>
+            <Name>LED3</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>3</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+         <Config index="4">
+            <Color>Yellow</Color>
+            <Name>LED4</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>4</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+         <Config index="5">
+            <Color>Yellow</Color>
+            <Name>LED5</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>5</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+         <Config index="6">
+            <Color>Yellow</Color>
+            <Name>LED6</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>6</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+         <Config index="7">
+            <Color>Yellow</Color>
+            <Name>LED7</Name>
+            <PortPin>
+               <Port>PORTC</Port>
+               <Bit>7</Bit>
+            </PortPin>
+            <Invert>0</Invert>
+         </Config>
+      </LEDs>
+      <Keypad>
+         <Name>Keypad1</Name>
+         <Position>
+            <top>0</top>
+            <left>0</left>
+         </Position>
+         <PortMapping>
+            <Strobe index="0">
+               <Port>PORTB</Port>
+               <Bit>0</Bit>
+            </Strobe>
+            <Strobe index="1">
+               <Port>PORTB</Port>
+               <Bit>1</Bit>
+            </Strobe>
+            <Strobe index="2">
+               <Port>PORTB</Port>
+               <Bit>2</Bit>
+            </Strobe>
+            <Strobe index="3">
+               <Port>PORTB</Port>
+               <Bit>3</Bit>
+            </Strobe>
+            <Input index="0">
+               <Port>PORTB</Port>
+               <Bit>4</Bit>
+            </Input>
+            <Input index="1">
+               <Port>PORTB</Port>
+               <Bit>5</Bit>
+            </Input>
+            <Input index="2">
+               <Port>PORTB</Port>
+               <Bit>6</Bit>
+            </Input>
+            <Input index="3">
+               <Port>PORTB</Port>
+               <Bit>7</Bit>
+            </Input>
+         </PortMapping>
+         <Buttons>
+            <Button index="0">
+               <Caption>1</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="1">
+               <Caption>4</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="2">
+               <Caption>7</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="3">
+               <Caption>Clear</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="4">
+               <Caption>2</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="5">
+               <Caption>5</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="6">
+               <Caption>8</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="7">
+               <Caption>0</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="8">
+               <Caption>3</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="9">
+               <Caption>6</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="10">
+               <Caption>9</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="11">
+               <Caption>Enter</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="12">
+               <Caption>Up</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="13">
+               <Caption>Down</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="14">
+               <Caption>Right</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+            <Button index="15">
+               <Caption>Left</Caption>
+               <PCKey>3452816845</PCKey>
+            </Button>
+         </Buttons>
+      </Keypad>
+   </Views>
+</HAPSIM>
