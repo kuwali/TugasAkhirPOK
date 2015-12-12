@@ -90,6 +90,7 @@ reset:
 	ldi data_num, 0
 	ldi data_counter, 0
 	ldi ret_status, 0
+	ldi status, 99
 
 	ldi parameter, 100
 	rcall init_ram
@@ -105,224 +106,56 @@ reset:
 
 	rjmp loop
 
-;main:
-	;ldi parameter, 20
-	;rcall insert
-	;ldi parameter, 5
-	;rcall insert
-	;ldi parameter, 5
-	;rcall insert
-	;ldi parameter, 10
-	;rcall insert
-	;ldi parameter, 11
-	;rcall delete
-	;ldi parameter, 5
-	;rcall search
-	;ldi parameter, 12
-	;rcall search
-	;ldi parameter, 5
-	;rcall delete
-	;ldi parameter, 20
-	;rcall delete
-	;ldi parameter, 20
-	;rcall search
-	;ldi parameter, 10
-	;rcall search
+;**** keypad checking
+loop:
+	ldi temp,0b00001111 
+	out PORTB,temp    
+	nop  
+    nop  
+	in temp,PINB     
+	ori temp,0b11110000 
+	cpi temp,0b11111111 
+	brne check_col      
+	rjmp loop
 
-LOOP:
-	ldi temp,0b00001111 ; PB4..PB6=Null, pull-Up-resistors to input lines
-	out PORTB,temp    ; of port pins PB0..PB3
-	nop  ; one nop delay inherent in AVR circuitry  
-    nop  ; second nop delay to ensure correct values
-	in temp,PINB     ; read key results
-	ori temp,0b11110000 ; mask all upper bits with a one
-	cpi temp,0b11111111 ; all bits = One?
-	brne KEY         ; yes, no key is pressed
-	rjmp LOOP
-
-KEY:
-; checking  Column 1, Row 1-4 through PORTB  
-	ldi temp, 0b10111111   ; PB6 = 0  
-	out PORTB, temp        ; output to PortB  
-	nop  ; one nop delay inherent in AVR circuitry  
-	nop  ; second nop delay to ensure correct values  
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	ori temp, 0b11110000  ; just righthand nibble 
-	cpi temp, 0b11111111   ; compare with ....0111 (Row1=0) 
-
-	brne ROWA1         ; branch if not equal, to Next ROW  
-	breq COL2
-
-ROWA1:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00000111   ; compare with ....0111 (Row1=0) 
-	brne ROWA2
-	ldi keyval, 1
-	rjmp result
-
-ROWA2:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001011   ; compare with ....0111 (Row1=0) 
-	brne ROWA3
-	ldi keyval, 4
-	rjmp result
-
-ROWA3:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001101   ; compare with ....0111 (Row1=0) 
-	brne ROWA4
-	ldi keyval, 7
-	rjmp result
-
-ROWA4:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001110   ; compare with ....0111 (Row1=0) 
-	brne LOOP
-	ldi keyval, 10
-	rjmp result
-
-COL2:
-	ldi temp, 0b11011111   ; set a mask with only column1 to 0  
-	out PORTB, temp        ; output to PortB  
-	nop  ; one nop delay inherent in AVR circuitry  
-	nop  ; second nop delay to ensure correct values  
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	ori temp, 0b11110000  ; just righthand nibble 
-
-	cpi temp, 0b11111111   ; compare with ....0111 (Row1=0) 
-	brne ROWB1         ; branch if not equal, to Next ROW  
-	breq COL3
-
-ROWB1:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00000111   ; compare with ....0111 (Row1=0) 
-	brne ROWB2
-	ldi keyval, 2
-	rjmp result
-
-ROWB2:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001011   ; compare with ....0111 (Row1=0) 
-	brne ROWB3
-	ldi keyval, 5
-	rjmp result
-
-ROWB3:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001101   ; compare with ....0111 (Row1=0) 
-	brne ROWB4
-	ldi keyval, 8
-	rjmp result
-
-ROWB4:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001110   ; compare with ....0111 (Row1=0) 
-	brne END1
+check_col:
+	ldi data_counter, 0b00001000
 	ldi keyval, 0
-	rjmp result
+	
+	do_check_col:	 
+		inc keyval
+		lsl data_counter
+		tst data_counter
+		breq loop
 
-COL3:
-	ldi temp, 0b11101111   ; set a mask with only column1 to 0  
-	out PORTB, temp        ; output to PortB  
-	nop  ; one nop delay inherent in AVR circuitry  
-	nop  ; second nop delay to ensure correct values  
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	ori temp, 0b11110000  ; just righthand nibble 
-	cpi temp, 0b11111111   ; compare with ....0111 (Row1=0) 
+		ldi temp, $FF
+		eor temp, data_counter
+		out PORTB, temp        
+		nop  
+		nop  
+		in temp, PINB          
+		ori temp, 0b11110000  
+		cpi temp, 0b11111111 
+		brne check_row
+		breq do_check_col
 
-	brne ROWC1         ; branch if not equal, to Next ROW  
-	breq COL4
+check_row:
+	ldi data_counter, 0b00010000
+	subi keyval, 4			; prepare keyval for 0 + col
 
-END1:
-	rjmp LOOP
-
-ROWC1:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00000111   ; compare with ....0111 (Row1=0) 
-	brne ROWC2  
-	ldi keyval, 3
-	rjmp result
-
-ROWC2:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001011   ; compare with ....0111 (Row1=0) 
-	brne ROWC3
-	ldi keyval, 6
-	rjmp result
-
-ROWC3:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001101   ; compare with ....0111 (Row1=0) 
-	brne ROWC4
-	ldi keyval, 9
-	rjmp result
-
-ROWC4:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001110   ; compare with ....0111 (Row1=0) 
-	ldi keyval, 11
-	rjmp result
-
-END2:	  
-	rjmp LOOP 
-
-COL4:
-	ldi temp, 0b01111111   ; set a mask with only column1 to 0  
-	out PORTB, temp        ; output to PortB  
-	nop  ; one nop delay inherent in AVR circuitry  
-	nop  ; second nop delay to ensure correct values  
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	ori temp, 0b11110000  ; just righthand nibble 
-	cpi temp, 0b11111111   ; compare with ....0111 (Row1=0) 
-
-	brne ROWD1         ; branch if not equal, to Next ROW  
-	breq END3
-
-ROWD1:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00000111   ; compare with ....0111 (Row1=0) 
-	brne ROWD2  
-	ldi keyval, 12
-	rjmp result
-
-ROWD2:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001011   ; compare with ....0111 (Row1=0) 
-	brne ROWD3
-	ldi keyval, 13
-	rjmp result
-
-ROWD3:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001101   ; compare with ....0111 (Row1=0) 
-	brne ROWD4
-	ldi keyval, 14
-	rjmp result
-
-ROWD4:
-	in temp, PINB          ; now we can check ‘temp’ for which row = 0 
-	andi temp, 0b00001111  ; just righthand nibble 
-	cpi temp, 0b00001110   ; compare with ....0111 (Row1=0) 
-	ldi keyval, 15
-	rjmp result
-
-END3:
-	rjmp LOOP
+	do_check_row:
+		subi keyval, -4
+		lsr data_counter
+		tst data_counter
+		breq loop
+		
+		in temp, PINB           
+		andi temp, 0b00001111
+		ldi R26, $0F
+		eor R26, data_counter
+		cp temp, R26
+		brne do_check_row
+		rjmp result
 
 start:
 	ldi	ZH,high(2*message_welcome)	; Load high part of byte address into ZH
@@ -369,24 +202,56 @@ shut_down:
 	rjmp loop
 
 result:
-	cpi keyval,12
+	cpi status, 99
+	brne shutdown_action
+	cpi keyval,4
 	breq start
-	cpi keyval,13
-	breq shut_down
-	cpi keyval,14
-	breq back_to_main
-	cpi keyval,11
-	breq finish
-	cpi keyval,10
-	breq clear
-	cpi status,0
-	brne write
-	cpi keyval,1
-	breq absence
-	cpi keyval,2
-	breq insert2
-	cpi keyval,3
-	breq delete_menu
+	
+	shutdown_action:
+		cpi keyval,8
+		breq shut_down
+		
+	cpi status, 99
+	brne back_actions
+	rjmp actions_input
+
+	back_actions:
+		cpi keyval,12
+		breq back_to_main
+
+	actions_input:
+		cpi keyval,15
+		breq finish
+		cpi keyval,13
+		breq clear
+
+	; keypad mapping
+	cpi keyval, 14
+	brne check_four
+	ldi keyval, 0
+
+	check_four:
+		cpi keyval, 4
+		breq check_status
+		brmi check_status
+		dec keyval
+		
+		cpi keyval, 8
+		breq check_status
+		brmi check_status
+		dec keyval
+	
+	check_status:
+		cpi status, 99
+		breq clear
+		cpi status,0
+		brne write
+		cpi keyval,1
+		breq absence
+		cpi keyval,2
+		breq insert2
+		cpi keyval,3
+		breq delete_menu
 
 clear:
 	cpi status,1
@@ -472,13 +337,6 @@ forever:
 	breq delete_menu
 	rcall clear_lcd
 	rjmp loop
-
-;************** Codingan asli
-	;st Y, keyval
-	;adiw YL, 1
-	;rjmp loop
-
-;***********************************
 
 	bef_blink:
 	ldi PB,$0C
@@ -752,10 +610,6 @@ delete:
 		ret	
 
 ;***** Data
-
-input:
-	.db 13245, 12345, 32089, 32479, 14335, 32108
-
 message_welcome:
 .db "WELCOME"
 .db	0

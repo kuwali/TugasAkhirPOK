@@ -133,7 +133,7 @@
          <PortMapping>
             <Strobe index="0">
                <Port>PORTB</Port>
-               <Bit>6</Bit>
+               <Bit>4</Bit>
             </Strobe>
             <Strobe index="1">
                <Port>PORTB</Port>
@@ -141,7 +141,7 @@
             </Strobe>
             <Strobe index="2">
                <Port>PORTB</Port>
-               <Bit>4</Bit>
+               <Bit>6</Bit>
             </Strobe>
             <Strobe index="3">
                <Port>PORTB</Port>
