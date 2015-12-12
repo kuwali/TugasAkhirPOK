@@ -33,18 +33,18 @@
 .include "m8515def.inc"
 
 ;***** Constants
-.equ data_addr = $60
-.equ end =$13
-.equ middle =$08
-.equ last =0b11010011
-.equ block1 = $60
-.equ toChar = $30
+.equ data_addr 		= $60
+.equ end 			= $13
+.equ middle 		= $08
+.equ last 			= 0b11010011
+.equ block1 		= $60
+.equ toChar 		= $30
 
 ;***** Interupt segment
 .org $00
 	rjmp RESET				; reset handle
 .org $07
-	; do for overflow interupt
+	rjmp overflow
 .org $0E
 	; do for compare interupt
 
@@ -71,8 +71,25 @@
 ; PORTB for Keypad
 ; PORTD for LED
 
-
 ;***** Code
+overflow:
+	push temp
+	in temp,SREG
+	push temp
+	
+	inc counter
+	cpi counter,5
+	breq dead  
+
+	pop temp
+	out SREG,temp
+	pop temp
+	reti
+
+dead:
+	rcall shut_down
+	rjmp loop
+
 reset:	
 	ldi	temp,low(RAMEND)
 	out	SPL,temp			;init Stack Pointer		
@@ -82,27 +99,38 @@ reset:
 	rcall INIT_LCD
 
 	ldi	temp,$ff
-	out	DDRA,temp	; Set port A as output
-	out	DDRC,temp	; Set port C as output
+	out	DDRA,temp			; Set port A as output
+	out	DDRC,temp			; Set port C as output
+	out	DDRD,temp			; Set port C as output
 	
 	rcall clear_lcd
 
-	ldi data_num, 0
-	ldi data_counter, 0
-	ldi ret_status, 0
-	ldi status, 99
+	ldi data_num,0
+	ldi data_counter,0
+	ldi ret_status,0
+	ldi status,99
 
-	ldi parameter, 100
+	ldi parameter,100
 	rcall init_ram
 
-; *** set up Direction Registers *** 
-	ldi temp, 0b11110000
-	out DDRB, temp
-	ldi temp, 0b00001111
-	out PORTB, temp
+; *** set up Timer Interrupt *** 
+	ldi temp, (1<<CS02)|(1<<CS00)	; (1<<CS02)|(1<<CS00) Timer clock = system clock/1024
+	out TCCR0,temp			
+	ldi temp,1<<TOV0
+	out TIFR,temp					; Interrupt if overflow occurs in T/C0
+	ldi temp,1<<TOIE0
+	out TIMSK,temp					; Enable Timer/Counter0 Overflow int
+	ser temp
+;	sei
 
-	ldi YL, low(block1)
-	ldi YH, high(block1)
+; *** set up Direction Registers *** 
+	ldi temp,0b11110000
+	out DDRB,temp
+	ldi temp,0b00001111
+	out PORTB,temp
+
+	ldi YL,low(block1)
+	ldi YH,high(block1)
 
 	rjmp loop
 
@@ -116,11 +144,12 @@ loop:
 	ori temp,0b11110000 
 	cpi temp,0b11111111 
 	brne check_col      
+	rcall wait_lcd
 	rjmp loop
 
 check_col:
-	ldi data_counter, 0b00001000
-	ldi keyval, 0
+	ldi data_counter,0b00001000
+	ldi keyval,0
 	
 	do_check_col:	 
 		inc keyval
@@ -128,54 +157,57 @@ check_col:
 		tst data_counter
 		breq loop
 
-		ldi temp, $FF
-		eor temp, data_counter
-		out PORTB, temp        
+		ldi temp,$FF
+		eor temp,data_counter
+		out PORTB,temp        
 		nop  
 		nop  
-		in temp, PINB          
-		ori temp, 0b11110000  
-		cpi temp, 0b11111111 
+		in temp,PINB          
+		ori temp,0b11110000  
+		cpi temp,0b11111111 
 		brne check_row
 		breq do_check_col
 
 check_row:
-	ldi data_counter, 0b00010000
-	subi keyval, 4			; prepare keyval for 0 + col
+	ldi data_counter,0b00010000
+	subi keyval,4			; prepare keyval for 0 + col
 
 	do_check_row:
-		subi keyval, -4
+		subi keyval,-4
 		lsr data_counter
 		tst data_counter
 		breq loop
 		
-		in temp, PINB           
-		andi temp, 0b00001111
-		ldi R26, $0F
-		eor R26, data_counter
-		cp temp, R26
+		in temp,PINB           
+		andi temp,0b00001111
+		ldi R26,$0F
+		eor R26,data_counter
+		cp temp,R26
 		brne do_check_row
 		rjmp result
 
 start:
-	ldi	ZH,high(2*message_welcome)	; Load high part of byte address into ZH
-	ldi	ZL,low(2*message_welcome)	; Load low part of byte address into ZL
-	rcall write_text
-	rcall make_end
+	ldi temp,1
+	out PORTD,temp	
 
-	rcall clear_lcd
+;	ldi	ZH,high(2*message_welcome)	; Load high part of byte address into ZH
+;	ldi	ZL,low(2*message_welcome)	; Load low part of byte address into ZL
+;	rcall write_text
+;	rcall make_end
 
-	ldi	ZH,high(2*message_to)	; Load high part of byte address into ZH
-	ldi	ZL,low(2*message_to)	; Load low part of byte address into ZL
-	rcall write_text
-	rcall make_end
+;	rcall clear_lcd
 
-	rcall clear_lcd
+;	ldi	ZH,high(2*message_to)	; Load high part of byte address into ZH
+;	ldi	ZL,low(2*message_to)	; Load low part of byte address into ZL
+;	rcall write_text
+;	rcall make_end
 
-	ldi	ZH,high(2*message_desc)	; Load high part of byte address into ZH
-	ldi	ZL,low(2*message_desc)	; Load low part of byte address into ZL
-	rcall write_text
-	rcall make_end
+;	rcall clear_lcd
+
+;	ldi	ZH,high(2*message_desc)	; Load high part of byte address into ZH
+;	ldi	ZL,low(2*message_desc)	; Load low part of byte address into ZL
+;	rcall write_text
+;	rcall make_end
 
 main_menu:
 	ldi status,0
@@ -199,6 +231,8 @@ back_to_main:
 shut_down:
 	ldi status,99
 	rcall clear_lcd
+	ldi temp,0
+	out PORTD,temp
 	rjmp loop
 
 result:
@@ -305,11 +339,11 @@ finish:
 	cpi status,1
 	breq absence_npm;label untuk method simpen waktunya
 	cpi status,2
-	breq forever;label untuk method simpen npm yang mau diinsert
+	breq write_finish;label untuk method simpen npm yang mau diinsert
 	cpi status,3
-	breq forever;label untuk method simpen npm yang mau didelete
+	breq write_finish;label untuk method simpen npm yang mau didelete
 	cpi status,4
-	breq forever;label untuk method absen dia di kelas
+	breq write_finish;label untuk method absen dia di kelas
 	 
 
 absence_npm:
@@ -320,14 +354,24 @@ absence_npm:
 	rcall write_text
 	rcall move_sec_line
 	rcall wait_lcd
+	ldi counter,0
+	sei
 	rjmp loop
 	;label untuk method simpen waktunya:
 	
-
-forever:
+;*******************************
+;*
+;* Write Finish
+;* 		write "Finished" to LCD 
+;*
+;* @param status, used to determined current menu status
+;* 
+;* @return move to lastest menu or main menu
+;*******************************
+write_finish:
+	rcall clear_lcd
 	ldi	ZH,high(2*message_finish)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_finish)	; Load low part of byte address into ZL
-	rcall clear_lcd
 	rcall write_text
 	cpi status,4
 	breq absence_npm
@@ -338,106 +382,167 @@ forever:
 	rcall clear_lcd
 	rjmp loop
 
-	bef_blink:
+;*******************************
+;*
+;* Blink Subroutine
+;* 		make LCD blinking
+;* 
+;* @return LCD is blinking
+;*******************************
+blink:
 	ldi PB,$0C
 	ldi temp, 0b00000100
-
-	BLINK:
-	cbi PORTA,1	; CLR RS
-	eor PB, temp	; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
+blink_loop:
+	cbi PORTA,1			; CLR RS
+	eor PB, temp		; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
 	out PORTC,PB
-	sbi PORTA,0	; SETB EN
-	cbi PORTA,0	; CLR EN
-	rcall WAIT_LCD	
-	rjmp BLINK
+	sbi PORTA,0			; SETB EN
+	cbi PORTA,0			; CLR EN
+	rcall wait_lcd
+	rjmp blink_loop
 
-	make_end:
+;*******************************
+;*
+;* Make End
+;* 		subroutine to move text to end of LCD
+;* 
+;* @return text moves from left to right end of LCD
+;*******************************
+make_end:
 	ldi counter,0
-	end_loop:
-	cbi PORTA,1	; CLR RS
-	ldi PB,0x1C	; MOV DATA,0x18 --> shift left
+end_loop:
+	cbi PORTA,1			; CLR RS
+	ldi PB,0x1C			; MOV DATA,0x18 --> shift left
 	out PORTC,PB
-	sbi PORTA,0	; SETB EN
-	cbi PORTA,0	; CLR EN
-	rcall WAIT_LCD
+	sbi PORTA,0			; SETB EN
+	cbi PORTA,0			; CLR EN
+	rcall wait_lcd
 	inc counter
 	cpi counter,end
 	brne end_loop
 	ret
 
-	move_sec_line:
-	cbi PORTA,1	; CLR RS
+;*******************************
+;*
+;* Move to Second Line
+;* 		subroutine to move cursor to second line
+;* 
+;* @return cursor moved to second line
+;*******************************
+move_sec_line:
+	cbi PORTA,1			; CLR RS
 	ldi PB,0b10100111	; MOV DATA, --> move cursor to second line
 	out PORTC,PB
-	sbi PORTA,0	; SETB EN
-	cbi PORTA,0	; CLR EN
+	sbi PORTA,0			; SETB EN
+	cbi PORTA,0			; CLR EN
 	rcall wait_lcd
 	ldi parameter,$20
 	rcall write_char
 	ret
 
-	WAIT_LCD:
+;*******************************
+;*
+;* Wait LCD
+;* 		Delay used for LCD
+;* 
+;*******************************
+wait_lcd:
 	ldi	r20, 1
 	ldi	r21, 69
 	ldi	r22, 69
-	CONT:	dec	r22
-	brne	CONT
+CONT:	
+	dec	r22
+	brne CONT
 	dec	r21
-	brne	CONT
+	brne CONT
 	dec	r20
-	brne	CONT
+	brne CONT
 	ret
 
-	INIT_LCD:
-	cbi PORTA,1 ; CLR RS
-	ldi PB,0x38 ; MOV DATA,0x38 --> 8bit, 2line, 5x7
+;*******************************
+;*
+;* Init LCD
+;* 		Initialized LCD to so it can be use
+;* 
+;* @return LCD ready to be used
+;*******************************
+init_lcd:
+	cbi PORTA,1 		; CLR RS
+	ldi PB,0x38 		; MOV DATA,0x38 --> 8bit, 2line, 5x7
 	out PORTC,PB
-	sbi PORTA,0 ; SETB EN
-	cbi PORTA,0 ; CLR EN
-	rcall WAIT_LCD
-	cbi PORTA,1 ; CLR RS
-	ldi PB,$0F ; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
+	sbi PORTA,0 		; SETB EN
+	cbi PORTA,0 		; CLR EN
+	rcall wait_lcd
+
+	cbi PORTA,1 		; CLR RS
+	ldi PB,$0F 			; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
 	out PORTC,PB
-	sbi PORTA,0 ; SETB EN
-	cbi PORTA,0 ; CLR EN
-	rcall WAIT_LCD
-	rcall CLEAR_LCD ; CLEAR LCD
-	cbi PORTA,1 ; CLR RS
-	ldi PB,$06 ; MOV DATA,0x06 --> increase cursor, display sroll OFF
+	sbi PORTA,0 		; SETB EN
+	cbi PORTA,0 		; CLR EN
+	rcall wait_lcd
+	rcall clear_lcd		; CLEAR LCD
+	
+	cbi PORTA,1 		; CLR RS
+	ldi PB,$06 			; MOV DATA,0x06 --> increase cursor, display sroll OFF
 	out PORTC,PB
-	sbi PORTA,0 ; SETB EN
-	cbi PORTA,0 ; CLR EN
-	rcall WAIT_LCD
+	sbi PORTA,0 		; SETB EN
+	cbi PORTA,0 		; CLR EN
+	rcall wait_lcd
 	ret
 
-	CLEAR_LCD:
-	cbi PORTA,1	; CLR RS
-	ldi PB,$01	; MOV DATA,0x01
+;*******************************
+;*
+;* Clear LCD
+;* 		Clear LCD from written text
+;* 
+;* @return LCD is cleared
+;*******************************
+clear_lcd:
+	cbi PORTA,1			; CLR RS
+	ldi PB,$01			; MOV DATA,0x01
 	out PORTC,PB
-	sbi PORTA,0	; SETB EN
-	cbi PORTA,0	; CLR EN
-	rcall WAIT_LCD
+	sbi PORTA,0			; SETB EN
+	cbi PORTA,0			; CLR EN
+	rcall wait_lcd
 	ret
 
-	WRITE_CHAR:
+;*******************************
+;*
+;* Write Char
+;* 		write char from write_text
+;*
+;* @param parameter (R19), char need to be printed 
+;* 
+;* @return char written in LCD
+;*******************************
+write_char:
 	inc counter
-	sbi PORTA,1	; SETB RS
+	sbi PORTA,1			; SETB RS
 	out PORTC, parameter
-	sbi PORTA,0	; SETB EN
-	cbi PORTA,0	; CLR EN
-	rcall WAIT_LCD
+	sbi PORTA,0			; SETB EN
+	cbi PORTA,0			; CLR EN
+	rcall wait_lcd
 	ret
 
-	WRITE_TEXT:
-	lpm	; Load byte from program memory into r0
-	tst	r0	; Check if we've reached the end of the message
-	breq quit	; If so, go
+;*******************************
+;*
+;* Write Text
+;* 		write text stored in Program Memory to LCD
+;*
+;* @param R0, char that will be write		
+;* @param parameter (R19), char sent to write_char 
+;* 
+;* @return text written in LCD
+;*******************************
+write_text:
+	lpm					; Load byte from program memory into r0
+	tst	r0				; Check if we've reached the end of the message
+	breq quit			; If so, go to quit
 	mov parameter, r0	; Put the character onto Port B
-	rcall WRITE_CHAR
-	adiw ZL,1	; Increase Z registers
-	rjmp WRITE_TEXT
-
-	quit: ret
+	rcall write_char
+	adiw ZL,1			; Increase Z registers
+	rjmp write_text
+	quit: ret			; return to caller
 
 
 ;*******************************
@@ -645,4 +750,3 @@ message_absence_npm:
 message_finish:
 .db "Finish"
 .db 0
-
