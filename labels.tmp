@@ -24,66 +24,74 @@
   <dead><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>94</LINE></dead>
   <shut_down><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>237</LINE></shut_down>
   <loop><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>143</LINE></loop>
-  <INIT_LCD><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>491</LINE></INIT_LCD>
-  <clear_lcd><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>522</LINE></clear_lcd>
-  <init_ram><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>579</LINE></init_ram>
+  <INIT_LCD><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>540</LINE></INIT_LCD>
+  <clear_lcd><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>571</LINE></clear_lcd>
+  <init_ram><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>628</LINE></init_ram>
   <check_col><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>155</LINE></check_col>
-  <wait_lcd><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>471</LINE></wait_lcd>
+  <wait_lcd><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>523</LINE></wait_lcd>
   <do_check_col><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>159</LINE></do_check_col>
   <check_row><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>176</LINE></check_row>
   <do_check_row><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>180</LINE></do_check_row>
   <result><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>246</LINE></result>
   <start><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>194</LINE></start>
   <main_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>217</LINE></main_menu>
-  <message_menu1><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>749</LINE></message_menu1>
-  <write_text><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>559</LINE></write_text>
-  <move_sec_line><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>454</LINE></move_sec_line>
-  <message_menu2><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>752</LINE></message_menu2>
+  <message_menu1><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>798</LINE></message_menu1>
+  <write_text><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>608</LINE></write_text>
+  <move_sec_line><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>506</LINE></move_sec_line>
+  <message_menu2><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>801</LINE></message_menu2>
   <back_to_main><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>234</LINE></back_to_main>
   <shutdown_action><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>253</LINE></shutdown_action>
-  <back_actions><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>261</LINE></back_actions>
-  <input_actions><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>265</LINE></input_actions>
-  <finish><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>358</LINE></finish>
-  <clear_actions><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>269</LINE></clear_actions>
-  <clear><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>301</LINE></clear>
-  <check_four><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>278</LINE></check_four>
-  <check_status><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>289</LINE></check_status>
-  <write_lcd_keypressed><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>325</LINE></write_lcd_keypressed>
-  <absence_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>312</LINE></absence_menu>
-  <insert_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>332</LINE></insert_menu>
-  <delete_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>345</LINE></delete_menu>
-  <absence_npm><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>368</LINE></absence_npm>
-  <message_absence_time><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>756</LINE></message_absence_time>
-  <WRITE_CHAR><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>540</LINE></WRITE_CHAR>
-  <message_insert><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>760</LINE></message_insert>
-  <message_delete><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>764</LINE></message_delete>
-  <write_finish><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>393</LINE></write_finish>
-  <message_absence_npm><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>768</LINE></message_absence_npm>
-  <message_finish><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>772</LINE></message_finish>
-  <blink><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>414</LINE></blink>
-  <blink_loop><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>417</LINE></blink_loop>
-  <make_end><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>433</LINE></make_end>
-  <end_loop><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>435</LINE></end_loop>
-  <CONT><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>475</LINE></CONT>
-  <quit><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>567</LINE></quit>
-  <init_ram_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>585</LINE></init_ram_do>
-  <init_ram_return><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>595</LINE></init_ram_return>
-  <search><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>610</LINE></search>
-  <search_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>617</LINE></search_do>
-  <search_return><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>631</LINE></search_return>
-  <search_status><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>628</LINE></search_status>
-  <insert><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>645</LINE></insert>
-  <insert_init><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>654</LINE></insert_init>
-  <insert_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>663</LINE></insert_do>
-  <insert_ret><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>680</LINE></insert_ret>
-  <insert_shift><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>671</LINE></insert_shift>
-  <delete><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>698</LINE></delete>
-  <delete_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>704</LINE></delete_do>
-  <delete_return><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>736</LINE></delete_return>
-  <delete_now><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>719</LINE></delete_now>
-  <delete_shift><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>727</LINE></delete_shift>
-  <message_welcome><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>740</LINE></message_welcome>
-  <message_to><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>743</LINE></message_to>
-  <message_desc><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>746</LINE></message_desc>
+  <back_actions><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>257</LINE></back_actions>
+  <input_actions><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>261</LINE></input_actions>
+  <finish><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>350</LINE></finish>
+  <clear_actions><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>265</LINE></clear_actions>
+  <clear><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>297</LINE></clear>
+  <check_four><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>274</LINE></check_four>
+  <check_status><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>285</LINE></check_status>
+  <write_lcd_keypressed><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>377</LINE></write_lcd_keypressed>
+  <absence_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>308</LINE></absence_menu>
+  <insert_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>322</LINE></insert_menu>
+  <delete_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>336</LINE></delete_menu>
+  <absence_npm><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>360</LINE></absence_npm>
+  <message_absence_time><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>805</LINE></message_absence_time>
+  <message_insert><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>809</LINE></message_insert>
+  <message_delete><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>813</LINE></message_delete>
+  <write_finish><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>397</LINE></write_finish>
+  <message_absence_npm><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>817</LINE></message_absence_npm>
+  <WRITE_CHAR><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>589</LINE></WRITE_CHAR>
+  <message_finish><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>821</LINE></message_finish>
+  <bef_absence_npm><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>438</LINE></bef_absence_npm>
+  <bef_insert_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>416</LINE></bef_insert_menu>
+  <bef_delete_menu><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>427</LINE></bef_delete_menu>
+  <insert><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>694</LINE></insert>
+  <no_error_i><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>423</LINE></no_error_i>
+  <error><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>449</LINE></error>
+  <no_error><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>454</LINE></no_error>
+  <delete><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>747</LINE></delete>
+  <no_error_d><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>434</LINE></no_error_d>
+  <search><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>659</LINE></search>
+  <no_error_a><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>445</LINE></no_error_a>
+  <blink><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>466</LINE></blink>
+  <blink_loop><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>469</LINE></blink_loop>
+  <make_end><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>485</LINE></make_end>
+  <end_loop><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>487</LINE></end_loop>
+  <CONT><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>526</LINE></CONT>
+  <quit><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>616</LINE></quit>
+  <init_ram_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>634</LINE></init_ram_do>
+  <init_ram_return><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>644</LINE></init_ram_return>
+  <search_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>666</LINE></search_do>
+  <search_return><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>680</LINE></search_return>
+  <search_status><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>677</LINE></search_status>
+  <insert_init><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>703</LINE></insert_init>
+  <insert_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>712</LINE></insert_do>
+  <insert_ret><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>729</LINE></insert_ret>
+  <insert_shift><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>720</LINE></insert_shift>
+  <delete_do><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>753</LINE></delete_do>
+  <delete_return><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>785</LINE></delete_return>
+  <delete_now><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>768</LINE></delete_now>
+  <delete_shift><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>776</LINE></delete_shift>
+  <message_welcome><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>789</LINE></message_welcome>
+  <message_to><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>792</LINE></message_to>
+  <message_desc><FILE>C:\Users\kuwali\Documents\GitHub\TugasAkhirPOK\TugasAkhir.asm</FILE><LINE>795</LINE></message_desc>
  </LABELS>
 </ASSEMBLER_INFO>

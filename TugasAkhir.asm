@@ -62,8 +62,8 @@
 .def data_counter   = R18
 .def parameter      = R19
 .def ret_status     = R20
-.def EW 			= R21	; for PORTA
-.def PB 			= R22	; for PORTB
+.def temp_data		= R21	
+.def unused			= R22
 .def status         = R23
 .def keyval         = R24
 .def counter        = R25
@@ -82,8 +82,8 @@ overflow:
 	in temp,SREG
 	push temp
 	
-	inc counter
-	cpi counter,5
+	dec counter
+	cpi counter,0
 	breq dead  
 
 	pop temp
@@ -254,10 +254,6 @@ shutdown_action:
 	cpi keyval,8
 	breq shut_down
 		
-;	cpi status,stat_off
-;	brne back_actions
-;	rjmp actions_input
-
 back_actions:
 	cpi keyval,12
 	breq back_to_main
@@ -282,7 +278,7 @@ clear_actions:
 		dec keyval
 		
 		cpi keyval, 8
-		breq check_status
+		;breq check_status
 		brmi check_status
 		dec keyval
 	
@@ -313,6 +309,7 @@ absence_menu:
 	ldi status,stat_absence
 
 	rcall clear_lcd
+	ldi temp_data,0
 
 	ldi	ZH,high(2*message_absence_time)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_absence_time)	; Load low part of byte address into ZL
@@ -322,17 +319,11 @@ absence_menu:
 
 	rjmp loop
 
-write_lcd_keypressed:
-	mov parameter,keyval
-	ldi temp,48
-	add parameter,temp
-	rcall WRITE_CHAR
-	rjmp loop
-
 insert_menu:
 	ldi status,stat_insert
 
 	rcall clear_lcd
+	ldi temp_data,0
 
 	ldi	ZH,high(2*message_insert)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_insert)	; Load low part of byte address into ZL
@@ -346,6 +337,7 @@ delete_menu:
 	ldi status,stat_delete
 
 	rcall clear_lcd
+	ldi temp_data,0
 
 	ldi	ZH,high(2*message_delete)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_delete)	; Load low part of byte address into ZL
@@ -369,6 +361,7 @@ absence_npm:
 	ldi status,stat_abs_menu
 
 	rcall clear_lcd
+	ldi temp_data,0
 
 	ldi	ZH,high(2*message_absence_npm)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_absence_npm)	; Load low part of byte address into ZL
@@ -376,10 +369,21 @@ absence_npm:
 
 	rcall move_sec_line
 
-	ldi counter,0						; reset counter reg to be used in timer
+	ldi counter,5						; initiate counter with time
 	sei									; start timer
 	rjmp loop
 	;label untuk method simpen waktunya:
+
+write_lcd_keypressed:
+	mov parameter,keyval
+	ldi temp,48
+	add parameter,temp
+	rcall WRITE_CHAR
+	ldi temp,10
+	mul temp,temp_data
+	mov temp_data,r0
+	add temp_data,keyval
+	rjmp loop
 	
 ;*******************************
 ;*
@@ -392,17 +396,65 @@ absence_npm:
 ;*******************************
 write_finish:
 	rcall clear_lcd
+	
 	ldi	ZH,high(2*message_finish)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_finish)	; Load low part of byte address into ZL
 	rcall write_text
+	
 	cpi status,stat_abs_menu
-	breq absence_npm
+	breq bef_absence_npm
+	
 	cpi status,stat_insert
-	breq insert_menu
+	breq bef_insert_menu
+	
 	cpi status,stat_delete
-	breq delete_menu
+	breq bef_delete_menu
+	
 	rcall clear_lcd
 	rjmp loop
+
+bef_insert_menu:
+	mov parameter,temp_data
+	rcall insert
+	cpi ret_status,1
+	breq no_error_i
+	rcall error
+	rjmp insert_menu
+	no_error_i:
+	rcall no_error
+	rjmp insert_menu
+
+bef_delete_menu:
+	mov parameter,temp_data
+	rcall delete
+	cpi ret_status,1
+	breq no_error_d
+	rcall error
+	rjmp delete_menu
+	no_error_d:
+	rcall no_error
+	rjmp delete_menu
+
+bef_absence_npm:
+	mov parameter,temp_data
+	rcall search
+	cpi ret_status,1
+	breq no_error_a
+	rcall error
+	rjmp absence_npm
+	no_error_a:
+	rcall no_error
+	rjmp absence_npm
+
+error:
+	ldi temp,3
+	out PORTD,temp
+	ret
+
+no_error:
+	ldi temp,1
+	out PORTD,temp
+	ret
 
 ;*******************************
 ;*
@@ -412,12 +464,12 @@ write_finish:
 ;* @return LCD is blinking
 ;*******************************
 blink:
-	ldi PB,$0C
-	ldi temp, 0b00000100
+	ldi temp,$0C
+	ldi counter, 0b00000100
 blink_loop:
 	cbi PORTA,1			; CLR RS
-	eor PB, temp		; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
-	out PORTC,PB
+	eor temp,counter		; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
+	out PORTC,temp
 	sbi PORTA,0			; SETB EN
 	cbi PORTA,0			; CLR EN
 	rcall wait_lcd
@@ -434,8 +486,8 @@ make_end:
 	ldi counter,0
 end_loop:
 	cbi PORTA,1			; CLR RS
-	ldi PB,0x1C			; MOV DATA,0x18 --> shift left
-	out PORTC,PB
+	ldi temp,0x1C		; MOV DATA,0x18 --> shift left
+	out PORTC,temp
 	sbi PORTA,0			; SETB EN
 	cbi PORTA,0			; CLR EN
 	rcall wait_lcd
@@ -453,8 +505,8 @@ end_loop:
 ;*******************************
 move_sec_line:
 	cbi PORTA,1			; CLR RS
-	ldi PB,0b10100111	; MOV DATA, --> move cursor to second line
-	out PORTC,PB
+	ldi temp,0b10100111	; MOV DATA, --> move cursor to second line
+	out PORTC,temp
 	sbi PORTA,0			; SETB EN
 	cbi PORTA,0			; CLR EN
 	rcall wait_lcd
@@ -469,15 +521,12 @@ move_sec_line:
 ;* 
 ;*******************************
 wait_lcd:
-	ldi	r20, 1
-	ldi	r21, 69
-	ldi	r22, 69
+	ldi	temp, 69
+	ldi	unused, 69
 CONT:	
-	dec	r22
+	dec	temp
 	brne CONT
-	dec	r21
-	brne CONT
-	dec	r20
+	dec	unused
 	brne CONT
 	ret
 
@@ -490,23 +539,23 @@ CONT:
 ;*******************************
 init_lcd:
 	cbi PORTA,1 		; CLR RS
-	ldi PB,0x38 		; MOV DATA,0x38 --> 8bit, 2line, 5x7
-	out PORTC,PB
+	ldi temp,0x38 		; MOV DATA,0x38 --> 8bit, 2line, 5x7
+	out PORTC,temp
 	sbi PORTA,0 		; SETB EN
 	cbi PORTA,0 		; CLR EN
 	rcall wait_lcd
 
 	cbi PORTA,1 		; CLR RS
-	ldi PB,$0F 			; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
-	out PORTC,PB
+	ldi temp,$0F		; MOV DATA,0x0E --> disp ON, cursor OFF, blink OFF
+	out PORTC,temp
 	sbi PORTA,0 		; SETB EN
 	cbi PORTA,0 		; CLR EN
 	rcall wait_lcd
 	rcall clear_lcd		; CLEAR LCD
 	
 	cbi PORTA,1 		; CLR RS
-	ldi PB,$06 			; MOV DATA,0x06 --> increase cursor, display sroll OFF
-	out PORTC,PB
+	ldi temp,$06 		; MOV DATA,0x06 --> increase cursor, display sroll OFF
+	out PORTC,temp
 	sbi PORTA,0 		; SETB EN
 	cbi PORTA,0 		; CLR EN
 	rcall wait_lcd
@@ -521,8 +570,8 @@ init_lcd:
 ;*******************************
 clear_lcd:
 	cbi PORTA,1			; CLR RS
-	ldi PB,$01			; MOV DATA,0x01
-	out PORTC,PB
+	ldi temp,$01		; MOV DATA,0x01
+	out PORTC,temp
 	sbi PORTA,0			; SETB EN
 	cbi PORTA,0			; CLR EN
 	rcall wait_lcd
