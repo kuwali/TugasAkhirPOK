@@ -379,12 +379,46 @@ write_lcd_keypressed:
 	ldi temp,48
 	add parameter,temp
 	rcall WRITE_CHAR
-	ldi temp,10
-	mul temp,temp_data
-	mov temp_data,r0
-	add temp_data,keyval
-	rjmp loop
+
+	; overflow checking
+	cpi temp_data, 25
+	breq test_boundary
+	brpl write_overflow
+	brne add_next_int
+
+	test_boundary:
+		cpi keyval, 5
+		breq add_next_int
+		brpl write_overflow
+
+	add_next_int:
+		ldi temp,10
+		mul temp,temp_data
+		mov temp_data,r0
+		add temp_data,keyval
+		rjmp loop
+
+write_overflow:
+	rcall clear_lcd
 	
+	ldi	ZH,high(2*message_overflow)	; Load high part of byte address into ZH
+	ldi	ZL,low(2*message_overflow)	; Load low part of byte address into ZL
+	rcall write_text
+
+	cpi status, stat_absence
+	breq absence_menu
+
+	cpi status,stat_abs_menu
+	breq absence_npm
+	
+	cpi status,stat_insert
+	breq insert_menu
+	
+	cpi status,stat_delete
+	breq delete_menu
+	
+	rjmp main_menu
+		
 ;*******************************
 ;*
 ;* Write Finish
@@ -800,6 +834,10 @@ message_menu1:
 .db 0
 message_menu2:
 .db "2Insert 3Delete"
+.db 0
+
+message_overflow:
+.db "Overflow"
 .db 0
 
 message_absence_time:
