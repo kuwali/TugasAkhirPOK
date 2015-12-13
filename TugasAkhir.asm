@@ -39,6 +39,12 @@
 .equ last 			= 0b11010011
 .equ block1 		= $60
 .equ toChar 		= $30
+.equ stat_off		= 99
+.equ stat_menu		= 0
+.equ stat_absence	= 1
+.equ stat_insert	= 2
+.equ stat_delete	= 3
+.equ stat_abs_menu	= 4
 
 ;***** Interupt segment
 .org $00
@@ -61,7 +67,6 @@
 .def status         = R23
 .def keyval         = R24
 .def counter        = R25
-
 
 ;***** Setting
 ; PORTC as DATA
@@ -108,7 +113,7 @@ reset:
 	ldi data_num,0
 	ldi data_counter,0
 	ldi ret_status,0
-	ldi status,99
+	ldi status,stat_off
 
 	ldi parameter,100
 	rcall init_ram
@@ -187,8 +192,8 @@ check_row:
 		rjmp result
 
 start:
-	ldi temp,1
-	out PORTD,temp	
+	ldi temp,1						
+	out PORTD,temp					; POWER LED turn on
 
 ;	ldi	ZH,high(2*message_welcome)	; Load high part of byte address into ZH
 ;	ldi	ZL,low(2*message_welcome)	; Load low part of byte address into ZL
@@ -197,75 +202,81 @@ start:
 
 ;	rcall clear_lcd
 
-;	ldi	ZH,high(2*message_to)	; Load high part of byte address into ZH
-;	ldi	ZL,low(2*message_to)	; Load low part of byte address into ZL
+;	ldi	ZH,high(2*message_to)		; Load high part of byte address into ZH
+;	ldi	ZL,low(2*message_to)		; Load low part of byte address into ZL
 ;	rcall write_text
 ;	rcall make_end
 
 ;	rcall clear_lcd
 
-;	ldi	ZH,high(2*message_desc)	; Load high part of byte address into ZH
-;	ldi	ZL,low(2*message_desc)	; Load low part of byte address into ZL
+;	ldi	ZH,high(2*message_desc)		; Load high part of byte address into ZH
+;	ldi	ZL,low(2*message_desc)		; Load low part of byte address into ZL
 ;	rcall write_text
 ;	rcall make_end
 
 main_menu:
-	ldi status,0
+	ldi status,stat_menu
+
 	rcall clear_lcd
 
 	ldi	ZH,high(2*message_menu1)	; Load high part of byte address into ZH
-	ldi	ZL,low(2*message_menu1)	; Load low part of byte address into ZL
+	ldi	ZL,low(2*message_menu1)		; Load low part of byte address into ZL
 	rcall write_text
 
 	rcall move_sec_line
 
 	ldi	ZH,high(2*message_menu2)	; Load high part of byte address into ZH
-	ldi	ZL,low(2*message_menu2)	; Load low part of byte address into ZL
+	ldi	ZL,low(2*message_menu2)		; Load low part of byte address into ZL
 	rcall write_text
 
-	rjmp loop
+	rjmp loop						; to check keypad input
 
 back_to_main:
-	rjmp main_menu
+	rjmp main_menu					; write back Menu to LCD
 
 shut_down:
-	ldi status,99
+	ldi status,stat_off
 	rcall clear_lcd
+
 	ldi temp,0
-	out PORTD,temp
-	rjmp loop
+	out PORTD,temp					; Turn LED POWER off
+
+	rjmp loop						; to check keypad input
 
 result:
-	cpi status, 99
+	cpi status,stat_off
 	brne shutdown_action
+
 	cpi keyval,4
 	breq start
 	
-	shutdown_action:
-		cpi keyval,8
-		breq shut_down
+shutdown_action:
+	cpi keyval,8
+	breq shut_down
 		
-	cpi status, 99
-	brne back_actions
-	rjmp actions_input
+;	cpi status,stat_off
+;	brne back_actions
+;	rjmp actions_input
 
-	back_actions:
-		cpi keyval,12
-		breq back_to_main
+back_actions:
+	cpi keyval,12
+	breq back_to_main
 
-	actions_input:
-		cpi keyval,15
-		breq finish
-		cpi keyval,13
-		breq clear
+input_actions:
+	cpi keyval,15
+	breq finish
 
-	; keypad mapping
-	cpi keyval, 14
+clear_actions:
+	cpi keyval,13
+	breq clear
+
+;**** keypad mapping
+	cpi keyval,14
 	brne check_four
 	ldi keyval, 0
 
 	check_four:
-		cpi keyval, 4
+		cpi keyval,4
 		breq check_status
 		brmi check_status
 		dec keyval
@@ -276,63 +287,72 @@ result:
 		dec keyval
 	
 	check_status:
-		cpi status, 99
+		cpi status,stat_off
 		breq clear
 		cpi status,0
-		brne write
+		brne write_lcd_keypressed
 		cpi keyval,1
-		breq absence
+		breq absence_menu
 		cpi keyval,2
-		breq insert2
+		breq insert_menu
 		cpi keyval,3
 		breq delete_menu
 
 clear:
-	cpi status,1
-	breq absence
-	cpi status,2
-	breq insert2
-	cpi status,3
+	cpi status,stat_absence
+	breq absence_menu
+	cpi status,stat_insert
+	breq insert_menu
+	cpi status,stat_delete
 	breq delete_menu
-	cpi status,4
+	cpi status,stat_abs_menu
 	breq absence_npm
 	rjmp loop
 
-absence:
-	ldi status,1
+absence_menu:
+	ldi status,stat_absence
+
 	rcall clear_lcd
+
 	ldi	ZH,high(2*message_absence_time)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_absence_time)	; Load low part of byte address into ZL
 	rcall write_text
+
 	rcall move_sec_line
-	rcall wait_lcd
+
 	rjmp loop
 
-write:
+write_lcd_keypressed:
 	mov parameter,keyval
 	ldi temp,48
 	add parameter,temp
 	rcall WRITE_CHAR
 	rjmp loop
 
-insert2 :
-	ldi status,2
+insert_menu:
+	ldi status,stat_insert
+
 	rcall clear_lcd
+
 	ldi	ZH,high(2*message_insert)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_insert)	; Load low part of byte address into ZL
 	rcall write_text
+	
 	rcall move_sec_line
-	rcall wait_lcd
+
 	rjmp loop
 
 delete_menu:
-	ldi status,3
+	ldi status,stat_delete
+
 	rcall clear_lcd
+
 	ldi	ZH,high(2*message_delete)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_delete)	; Load low part of byte address into ZL
 	rcall write_text
+
 	rcall move_sec_line
-	rcall wait_lcd
+
 	rjmp loop
 
 finish:
@@ -345,17 +365,19 @@ finish:
 	cpi status,4
 	breq write_finish;label untuk method absen dia di kelas
 	 
-
 absence_npm:
-	ldi status,4
+	ldi status,stat_abs_menu
+
 	rcall clear_lcd
+
 	ldi	ZH,high(2*message_absence_npm)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_absence_npm)	; Load low part of byte address into ZL
 	rcall write_text
+
 	rcall move_sec_line
-	rcall wait_lcd
-	ldi counter,0
-	sei
+
+	ldi counter,0						; reset counter reg to be used in timer
+	sei									; start timer
 	rjmp loop
 	;label untuk method simpen waktunya:
 	
@@ -373,11 +395,11 @@ write_finish:
 	ldi	ZH,high(2*message_finish)	; Load high part of byte address into ZH
 	ldi	ZL,low(2*message_finish)	; Load low part of byte address into ZL
 	rcall write_text
-	cpi status,4
+	cpi status,stat_abs_menu
 	breq absence_npm
-	cpi status,2
-	breq insert2
-	cpi status,3
+	cpi status,stat_insert
+	breq insert_menu
+	cpi status,stat_delete
 	breq delete_menu
 	rcall clear_lcd
 	rjmp loop
