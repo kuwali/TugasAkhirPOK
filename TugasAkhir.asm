@@ -369,7 +369,7 @@ absence_npm:
 
 	rcall move_sec_line
 
-	ldi counter,5						; initiate counter with time
+	;ldi counter,5						; initiate counter with time
 	sei									; start timer
 	rjmp loop
 	;label untuk method simpen waktunya:
@@ -470,14 +470,7 @@ bef_delete_menu:
 	rjmp delete_menu
 
 bef_absence_npm:
-	mov parameter,temp_data
-	rcall search
-	cpi ret_status,1
-	breq no_error_a
-	rcall error
-	rjmp absence_npm
-	no_error_a:
-	rcall no_error
+	mov counter,temp_data
 	rjmp absence_npm
 
 error:
